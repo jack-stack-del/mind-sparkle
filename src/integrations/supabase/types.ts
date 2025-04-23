@@ -9,7 +9,194 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      [_ in never]: never
+      challenge_results: {
+        Row: {
+          challenge_id: string
+          result_id: string
+          score: number | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          challenge_id: string
+          result_id?: string
+          score?: number | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          challenge_id?: string
+          result_id?: string
+          score?: number | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "challenge_results_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      cognitive_progress: {
+        Row: {
+          creativity_score: number | null
+          emotional_regulation_score: number | null
+          focus_score: number | null
+          id: number
+          last_updated: string | null
+          memory_score: number | null
+          problem_solving_score: number | null
+          user_id: number | null
+        }
+        Insert: {
+          creativity_score?: number | null
+          emotional_regulation_score?: number | null
+          focus_score?: number | null
+          id?: number
+          last_updated?: string | null
+          memory_score?: number | null
+          problem_solving_score?: number | null
+          user_id?: number | null
+        }
+        Update: {
+          creativity_score?: number | null
+          emotional_regulation_score?: number | null
+          focus_score?: number | null
+          id?: number
+          last_updated?: string | null
+          memory_score?: number | null
+          problem_solving_score?: number | null
+          user_id?: number | null
+        }
+        Relationships: []
+      }
+      daily_challenges: {
+        Row: {
+          challenge_id: string
+          challenge_type: string | null
+          completed: boolean | null
+          scheduled_date: string | null
+          user_id: string
+        }
+        Insert: {
+          challenge_id?: string
+          challenge_type?: string | null
+          completed?: boolean | null
+          scheduled_date?: string | null
+          user_id: string
+        }
+        Update: {
+          challenge_id?: string
+          challenge_type?: string | null
+          completed?: boolean | null
+          scheduled_date?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "daily_challenges_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      user_progress: {
+        Row: {
+          progress_data: Json | null
+          progress_id: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          progress_data?: Json | null
+          progress_id?: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          progress_data?: Json | null
+          progress_id?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_progress_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      user_settings: {
+        Row: {
+          difficulty_level: string | null
+          notification_preferences: Json | null
+          settings_id: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          difficulty_level?: string | null
+          notification_preferences?: Json | null
+          settings_id?: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          difficulty_level?: string | null
+          notification_preferences?: Json | null
+          settings_id?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_settings_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["user_id"]
+          },
+        ]
+      }
+      users: {
+        Row: {
+          auth_user_id: string | null
+          created_at: string | null
+          email: string
+          profile_picture: string | null
+          updated_at: string | null
+          user_id: string
+          username: string
+        }
+        Insert: {
+          auth_user_id?: string | null
+          created_at?: string | null
+          email: string
+          profile_picture?: string | null
+          updated_at?: string | null
+          user_id?: string
+          username: string
+        }
+        Update: {
+          auth_user_id?: string | null
+          created_at?: string | null
+          email?: string
+          profile_picture?: string | null
+          updated_at?: string | null
+          user_id?: string
+          username?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
