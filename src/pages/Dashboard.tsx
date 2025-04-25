@@ -14,7 +14,7 @@ const Dashboard = () => {
       description: "Strengthen your recall and working memory",
       icon: Brain,
       colorClass: "border-neuro-memory",
-      path: "/games/memory",
+      path: "/games",
       comingSoon: false,
     },
     {
@@ -22,15 +22,15 @@ const Dashboard = () => {
       description: "Enhance focus and concentration",
       icon: Clock,
       colorClass: "border-neuro-attention",
-      path: "/games/attention",
-      comingSoon: true,
+      path: "/games",
+      comingSoon: false,
     },
     {
       title: "Creative Mode",
       description: "Develop divergent thinking and imagination",
       icon: Sparkles,
       colorClass: "border-neuro-creative",
-      path: "/games/creative",
+      path: "/games",
       comingSoon: true,
     },
     {
@@ -38,15 +38,15 @@ const Dashboard = () => {
       description: "Build logical reasoning and critical thinking",
       icon: PuzzleIcon,
       colorClass: "border-neuro-problem",
-      path: "/games/problem-solving",
-      comingSoon: true,
+      path: "/games",
+      comingSoon: false,
     },
     {
       title: "Emotional Regulation",
       description: "Improve emotional intelligence and response",
       icon: Heart,
       colorClass: "border-neuro-emotional",
-      path: "/games/emotional",
+      path: "/games",
       comingSoon: true,
     },
   ];
@@ -66,8 +66,8 @@ const Dashboard = () => {
             <Button variant="outline" asChild>
               <Link to="/assessment">Take Assessment</Link>
             </Button>
-            <Button asChild>
-              <Link to="/games/memory">Daily Challenge</Link>
+            <Button asChild className="mint-gradient">
+              <Link to="/games">Daily Challenge</Link>
             </Button>
           </div>
         </div>
