@@ -39,15 +39,17 @@ const MatchFlip = () => {
     }
     
     // Timer for game
-    let timer: NodeJS.Timer | null = null;
+    let timerId: number | undefined = undefined;
     if (gameState === "playing") {
-      timer = setInterval(() => {
+      timerId = window.setInterval(() => {
         setTimeElapsed(prev => prev + 1);
       }, 1000);
     }
     
     return () => {
-      if (timer) clearInterval(timer);
+      if (timerId !== undefined) {
+        window.clearInterval(timerId);
+      }
     };
   }, [gameState]);
 
