@@ -76,7 +76,7 @@ const Index = () => {
                   <Link to="/register">Get Started <ArrowRight className="ml-2 h-4 w-4" /></Link>
                 </Button>
                 <Button size="lg" variant="outline" asChild>
-                  <Link to="/games/memory">Try a Game</Link>
+                  <Link to="/games">Try a Game</Link>
                 </Button>
               </div>
             </div>
@@ -150,7 +150,7 @@ const Index = () => {
               <Link to="/" className="hover:text-primary">Home</Link>
               <Link to="/about" className="hover:text-primary">About</Link>
               <Link to="/games" className="hover:text-primary">Games</Link>
-              <Link to="/science" className="hover:text-primary">The Science</Link>
+              <Link to="/insights" className="hover:text-primary">The Science</Link>
             </div>
             <p className="text-sm text-muted-foreground">
               &copy; {new Date().getFullYear()} NeuroQuest. All rights reserved.

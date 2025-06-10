@@ -56,6 +56,14 @@ const GamesHub = () => {
         difficulty: "Medium"
       },
       {
+        id: "wordmemory", 
+        title: "Word Memory",
+        description: "Memorize words and recall them to strengthen verbal memory",
+        path: "/games/wordmemory",
+        imageUrl: "/placeholder.svg",
+        difficulty: "Easy" 
+      },
+      {
         id: "patternrecall", 
         title: "Pattern Recall",
         description: "Remember and repeat sequences of colors or symbols",
@@ -72,6 +80,14 @@ const GamesHub = () => {
         path: "/games/numberorder",
         imageUrl: "/placeholder.svg",
         difficulty: "Medium"
+      },
+      {
+        id: "colorstroop",
+        title: "Color Stroop",
+        description: "Identify text colors while ignoring word meaning",
+        path: "/games/colorstroop",
+        imageUrl: "/placeholder.svg",
+        difficulty: "Hard"
       }
     ],
     reaction: [
@@ -80,6 +96,14 @@ const GamesHub = () => {
         title: "Speed Tap",
         description: "Tap when specific colors or symbols appear",
         path: "/games/speedtap",
+        imageUrl: "/placeholder.svg",
+        difficulty: "Easy"
+      },
+      {
+        id: "simplereaction",
+        title: "Simple Reaction",
+        description: "Test your basic reaction time with simple stimuli",
+        path: "/games/simplereaction",
         imageUrl: "/placeholder.svg",
         difficulty: "Easy"
       }

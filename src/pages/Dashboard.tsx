@@ -14,7 +14,7 @@ const Dashboard = () => {
       description: "Strengthen your recall and working memory",
       icon: Brain,
       colorClass: "border-neuro-memory",
-      path: "/games",
+      path: "/games/matchflip",
       comingSoon: false,
     },
     {
@@ -22,7 +22,7 @@ const Dashboard = () => {
       description: "Enhance focus and concentration",
       icon: Clock,
       colorClass: "border-neuro-attention",
-      path: "/games",
+      path: "/games/numberorder",
       comingSoon: false,
     },
     {
@@ -30,15 +30,15 @@ const Dashboard = () => {
       description: "Develop divergent thinking and imagination",
       icon: Sparkles,
       colorClass: "border-neuro-creative",
-      path: "/games",
-      comingSoon: true,
+      path: "/games/wordmemory",
+      comingSoon: false,
     },
     {
       title: "Problem-Solving Mode",
       description: "Build logical reasoning and critical thinking",
       icon: PuzzleIcon,
       colorClass: "border-neuro-problem",
-      path: "/games",
+      path: "/games/sortitfast",
       comingSoon: false,
     },
     {
@@ -46,8 +46,8 @@ const Dashboard = () => {
       description: "Improve emotional intelligence and response",
       icon: Heart,
       colorClass: "border-neuro-emotional",
-      path: "/games",
-      comingSoon: true,
+      path: "/games/colorstroop",
+      comingSoon: false,
     },
   ];
 
@@ -64,10 +64,10 @@ const Dashboard = () => {
           </div>
           <div className="flex gap-2">
             <Button variant="outline" asChild>
-              <Link to="/assessment">Take Assessment</Link>
+              <Link to="/games">Browse Games</Link>
             </Button>
             <Button asChild className="mint-gradient">
-              <Link to="/games">Daily Challenge</Link>
+              <Link to="/games/speedtap">Daily Challenge</Link>
             </Button>
           </div>
         </div>
