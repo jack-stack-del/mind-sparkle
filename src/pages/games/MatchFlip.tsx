@@ -1,10 +1,12 @@
 
 import { useState, useEffect } from "react";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
 import GameLayout from "@/components/GameLayout";
 import Reward from "@/components/Reward";
-import { Timer } from "lucide-react";
+import GameTimer from "@/components/games/GameTimer";
+import MemoryCardGrid from "@/components/games/MemoryCardGrid";
+import GameStats from "@/components/games/GameStats";
+import GameResults from "@/components/games/GameResults";
+import GameStartScreen from "@/components/games/GameStartScreen";
 
 // Card symbols using emoji for simplicity
 const SYMBOLS = ["🍎", "🍌", "🍇", "🍓", "🍊", "🍉", "🍋", "🍍"];
@@ -141,12 +143,6 @@ const MatchFlip = () => {
     }
   };
 
-  const formatTime = (seconds: number) => {
-    const mins = Math.floor(seconds / 60);
-    const secs = seconds % 60;
-    return `${mins}:${secs < 10 ? '0' : ''}${secs}`;
-  };
-
   return (
     <GameLayout 
       title="Match & Flip"
@@ -154,76 +150,29 @@ const MatchFlip = () => {
       backLink="/games"
     >
       {gameState === "playing" && (
-        <div className="mb-6 flex justify-between">
-          <div className="flex items-center gap-2">
-            <Timer className="h-5 w-5 text-primary" />
-            <span className="font-bold">{formatTime(timeElapsed)}</span>
-          </div>
-          <div className="font-bold">
-            Moves: {moves}
-          </div>
-        </div>
+        <GameTimer timeElapsed={timeElapsed} moves={moves} />
       )}
       
       <div className="bg-muted/30 rounded-lg p-4 min-h-[350px] flex flex-col justify-center">
         {gameState === "idle" && (
-          <div className="text-center">
-            <h3 className="text-xl font-bold mb-2">Memory Challenge</h3>
-            <p className="text-muted-foreground mb-4">Find matching pairs of cards in as few moves as possible</p>
-            <Button onClick={startGame} className="mint-gradient">Start Game</Button>
-          </div>
+          <GameStartScreen onStartGame={startGame} />
         )}
         
         {gameState === "playing" && (
-          <div className="grid grid-cols-4 gap-3">
-            {cards.map(card => (
-              <button
-                key={card.id}
-                onClick={() => handleCardClick(card.id)}
-                className={`aspect-square rounded-lg transition-all transform ${
-                  card.flipped || card.matched 
-                    ? 'bg-white rotate-y-180' 
-                    : 'bg-primary text-primary-foreground'
-                } ${card.matched ? 'opacity-70' : ''}`}
-                disabled={card.matched}
-              >
-                {(card.flipped || card.matched) && (
-                  <span className="text-3xl">{card.symbol}</span>
-                )}
-              </button>
-            ))}
-          </div>
+          <MemoryCardGrid cards={cards} onCardClick={handleCardClick} />
         )}
         
         {gameState === "complete" && (
-          <div className="text-center">
-            <h3 className="text-xl font-bold mb-2">Well Done!</h3>
-            <p className="mb-1">Time: {formatTime(timeElapsed)}</p>
-            <p className="mb-4">Moves: {moves}</p>
-            <Button onClick={startGame} className="mint-gradient">Play Again</Button>
-          </div>
+          <GameResults 
+            timeElapsed={timeElapsed} 
+            moves={moves} 
+            onPlayAgain={startGame} 
+          />
         )}
       </div>
       
       {gameState !== "idle" && (
-        <Card className="mt-6">
-          <CardContent className="pt-6">
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <div className="text-sm text-muted-foreground">Best Time</div>
-                <div className="font-bold">
-                  {bestTime === Infinity ? "-" : formatTime(bestTime)}
-                </div>
-              </div>
-              <div>
-                <div className="text-sm text-muted-foreground">Best Moves</div>
-                <div className="font-bold">
-                  {bestMoves === Infinity ? "-" : bestMoves}
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
+        <GameStats bestTime={bestTime} bestMoves={bestMoves} />
       )}
       
       {showReward && <Reward />}
