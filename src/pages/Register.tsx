@@ -1,12 +1,13 @@
 
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Brain } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -14,26 +15,43 @@ const Register = () => {
   const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
 
-    // This is a placeholder. We'll implement actual auth with Supabase later
     try {
-      setTimeout(() => {
+      const { data, error } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          data: {
+            name: name,
+          },
+        },
+      });
+
+      if (error) {
         toast({
-          title: "Account created",
-          description: "You can now sign in to access your account.",
+          title: "Registration failed",
+          description: error.message,
+          variant: "destructive",
         });
-        setLoading(false);
-      }, 1500);
+      } else if (data.user) {
+        toast({
+          title: "Account created successfully",
+          description: "You can now sign in to your account.",
+        });
+        navigate("/login");
+      }
     } catch (error) {
       toast({
         title: "Something went wrong",
         description: "Please try again later.",
         variant: "destructive",
       });
+    } finally {
       setLoading(false);
     }
   };
@@ -83,6 +101,7 @@ const Register = () => {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
+                minLength={6}
               />
             </div>
             <Button type="submit" className="w-full" disabled={loading}>

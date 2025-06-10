@@ -2,6 +2,8 @@
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./contexts/AuthContext";
+import ProtectedRoute from "./components/ProtectedRoute";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Login from "./pages/Login";
@@ -20,23 +22,57 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/games" element={<GamesHub />} />
-          <Route path="/games/memory" element={<MemoryGame />} />
-          <Route path="/games/speedtap" element={<SpeedTap />} />
-          <Route path="/games/numberorder" element={<NumberOrder />} />
-          <Route path="/games/patternrecall" element={<PatternRecall />} />
-          <Route path="/games/matchflip" element={<MatchFlip />} />
-          <Route path="/games/sortitfast" element={<SortItFast />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route path="/dashboard" element={
+              <ProtectedRoute>
+                <Dashboard />
+              </ProtectedRoute>
+            } />
+            <Route path="/games" element={
+              <ProtectedRoute>
+                <GamesHub />
+              </ProtectedRoute>
+            } />
+            <Route path="/games/memory" element={
+              <ProtectedRoute>
+                <MemoryGame />
+              </ProtectedRoute>
+            } />
+            <Route path="/games/speedtap" element={
+              <ProtectedRoute>
+                <SpeedTap />
+              </ProtectedRoute>
+            } />
+            <Route path="/games/numberorder" element={
+              <ProtectedRoute>
+                <NumberOrder />
+              </ProtectedRoute>
+            } />
+            <Route path="/games/patternrecall" element={
+              <ProtectedRoute>
+                <PatternRecall />
+              </ProtectedRoute>
+            } />
+            <Route path="/games/matchflip" element={
+              <ProtectedRoute>
+                <MatchFlip />
+              </ProtectedRoute>
+            } />
+            <Route path="/games/sortitfast" element={
+              <ProtectedRoute>
+                <SortItFast />
+              </ProtectedRoute>
+            } />
+            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
